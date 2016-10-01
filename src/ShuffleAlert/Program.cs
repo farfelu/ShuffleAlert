@@ -38,9 +38,17 @@ namespace ShuffleAlert
                 Icon = SystemIcons.Application,
                 BalloonTipIcon = ToolTipIcon.Warning,
                 BalloonTipTitle = "Shufflechat died",
-                BalloonTipText = "MembersInChat reached zero",
-                ContextMenu = new ContextMenu(new MenuItem[] { new MenuItem("Exit", (s, e) => Application.Exit()) })
+                BalloonTipText = "MembersInChat reached zero"
             };
+            
+            notifyIcon.ContextMenu = new ContextMenu(
+                new MenuItem[] {
+                    new MenuItem("Exit", (s, e) => {
+                        notifyIcon.Visible = false;
+                        Application.Exit();
+                    })
+                }
+            );
 
             // check class with action handlers
             var check = new ShuffleCheck();
