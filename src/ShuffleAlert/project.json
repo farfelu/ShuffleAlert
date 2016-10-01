@@ -4,16 +4,13 @@
         "emitEntryPoint": true
     },
 
-    "dependencies": {
-        "System.Runtime.InteropServices": "4.1.0"
-    },
-
     "frameworks": {
         "net461": {
             "dependencies": {
                 "System.Net.Http": "4.0.0",
                 "System.Windows.Forms": "4.0.0",
-                "System.Drawing.Common": "4.0.0"
+                "System.Drawing.Common": "4.0.0",
+                "System.Runtime.InteropServices": "4.0.20"
             }
         }
     }
