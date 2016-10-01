@@ -9,10 +9,17 @@ namespace ShuffleAlert
     {
         private const string SHUFFLEURL = "https://steamcommunity.com/groups/shuffcat/memberslistxml/?xml=1";
 
+        public event EventHandler ChatDied;
+
+        protected virtual void OnChatDied()
+        {
+            ChatDied?.Invoke(this, null);
+        }
+
         public async Task Run()
         {
             var memberCount = 0;
-            while(true)
+            while (true)
             {
                 try
                 {
@@ -24,17 +31,17 @@ namespace ShuffleAlert
 
                         var match = rex.Match(xml);
                         var newMemberCount = int.Parse(match.Groups[1].Value);
-                        
-                        if(memberCount != 0 && newMemberCount == 0)
+
+                        if (memberCount != 0 && newMemberCount == 0)
                         {
-                            // it died, now what?
+                            OnChatDied();
                         }
 
                         memberCount = newMemberCount;
                     }
                 }
                 catch { }
-                
+
                 await Task.Delay(10 * 1000);
             }
         }
